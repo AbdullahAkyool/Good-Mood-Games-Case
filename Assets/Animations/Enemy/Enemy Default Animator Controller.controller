@@ -134,7 +134,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: "Hit\u0131ndex"
+    m_ConditionEvent: HitIndex
     m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2147463638604504536}
@@ -157,7 +157,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: "Hit\u0131ndex"
+  - m_Name: HitIndex
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -185,7 +185,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: "Hit\u0131ndex"
+    m_ConditionEvent: HitIndex
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5281309958877001252}
@@ -391,7 +391,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: "Hit\u0131ndex"
+    m_ConditionEvent: HitIndex
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 721610410176213170}
@@ -449,7 +449,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: "Hit\u0131ndex"
+    m_ConditionEvent: HitIndex
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5493588288809907404}

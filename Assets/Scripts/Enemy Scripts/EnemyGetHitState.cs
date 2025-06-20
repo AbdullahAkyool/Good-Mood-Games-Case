@@ -13,7 +13,7 @@ public class EnemyGetHitState : IState
     {
         EnemyGetHitAnimation();
     }
-    public void StateUpdate(){}
+    public void StateUpdate() { }
 
     public void StateExit(){}
 

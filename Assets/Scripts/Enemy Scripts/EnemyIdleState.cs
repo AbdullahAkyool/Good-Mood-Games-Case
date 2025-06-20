@@ -10,6 +10,7 @@ public class EnemyIdleState : IState
     }
     public void StateEnter()
     {
+        enemy.Animator.CrossFade("Idle", 0.1f);
         enemy.Animator.ResetTrigger("GetHit");
     }
     public void StateUpdate(){}

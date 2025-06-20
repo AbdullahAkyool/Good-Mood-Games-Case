@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ProgressBarController progressBarController;
     public ProgressBarController ProgressBarController => progressBarController;
 
+    [SerializeField] TMP_Text currentMovementTypeText;
+
     private void Awake()
     {
         Instance = this;
@@ -35,5 +37,10 @@ public class UIManager : MonoBehaviour
     private void HideAttackMessage()
     {
         attackText.gameObject.SetActive(false);
+    }
+
+    public void SetCurrentMovementTypeText(PlayerController playerController)
+    {
+        currentMovementTypeText.text =  playerController.MovementType == MovementTypeEnum.Directional ? "Movement Type = Directional" : "Movement Type = Strafe";
     }
 }

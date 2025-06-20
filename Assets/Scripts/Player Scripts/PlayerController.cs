@@ -1,3 +1,5 @@
+using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +11,9 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     public Animator Animator => animator;
+
+    [SerializeField] private AnimatorOverrideController DirectionalMovementAnimatorController;
+    [SerializeField] private AnimatorOverrideController StrafeMovementAnimatorController;
 
     [SerializeField] private MovementTypeEnum movementType = MovementTypeEnum.Directional;
     public MovementTypeEnum MovementType => movementType;
@@ -22,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sword sword;
     public Sword Sword => sword;
 
+    private UIManager uiManager;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -32,11 +39,36 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         stateMachine.ChangeState(new PlayerIdleState(this));
+
+        uiManager = UIManager.Instance;
+
+        uiManager.SetCurrentMovementTypeText(this);
     }
 
     private void Update()
     {
         stateMachine.Update();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleMovementType();
+        }
+    }
+
+    private void ToggleMovementType()
+    {
+        if (movementType == MovementTypeEnum.Directional)
+        {
+            movementType = MovementTypeEnum.Strafe;
+            animator.runtimeAnimatorController = StrafeMovementAnimatorController;
+        }
+        else
+        {
+            movementType = MovementTypeEnum.Directional;
+            animator.runtimeAnimatorController = DirectionalMovementAnimatorController;
+        }
+
+        uiManager.SetCurrentMovementTypeText(this);
     }
 
     public void UpdateMovement(Vector2 input, bool isRunning = false)

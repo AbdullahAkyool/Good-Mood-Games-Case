@@ -14,9 +14,18 @@ public class GameManager : MonoBehaviour
         SetCursorLock(true);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            bool isLocked = Cursor.lockState == CursorLockMode.Confined;
+            SetCursorLock(!isLocked);
+        }
+    }
+
     public void SetCursorLock(bool lockCursor)
     {
-        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.lockState = lockCursor ? CursorLockMode.Confined : CursorLockMode.None;
         Cursor.visible = !lockCursor;
     }
 }

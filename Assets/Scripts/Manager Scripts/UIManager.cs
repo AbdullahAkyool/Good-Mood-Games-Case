@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TMP_Text currentMovementTypeText;
 
+    [SerializeField] private Button exitGameButton;
+
     private void Awake()
     {
         Instance = this;
+
+        exitGameButton.onClick.AddListener(Application.Quit);
     }
 
     void OnEnable()
@@ -41,6 +46,6 @@ public class UIManager : MonoBehaviour
 
     public void SetCurrentMovementTypeText(PlayerController playerController)
     {
-        currentMovementTypeText.text =  playerController.MovementType == MovementTypeEnum.Directional ? "Movement Type = Directional" : "Movement Type = Strafe";
+        currentMovementTypeText.text = playerController.MovementType == MovementTypeEnum.Directional ? "Movement Type = Directional" : "Movement Type = Strafe";
     }
 }

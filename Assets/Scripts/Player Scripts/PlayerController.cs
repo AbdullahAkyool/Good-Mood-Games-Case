@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 2f;
     private Vector2 moveInput;
 
+    [SerializeField] private AttackZoneController attackZoneController;
+    public AttackZoneController AttackZoneController => attackZoneController;
+
+    [SerializeField] private Sword sword;
+    public Sword Sword => sword;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -107,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         if (stateMachine != null && stateMachine.CurrentState is PlayerAttackState playerAttackState)
         {
-            Debug.Log("Attack hit");
+            playerAttackState.OnAttackAnimationHit(attackZoneController.EnemiesOnTarget);
         }
     }
 }

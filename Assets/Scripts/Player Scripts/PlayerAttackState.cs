@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackState : IState
@@ -83,9 +84,26 @@ public class PlayerAttackState : IState
         progressBarController.HideProgressBar();
     }
 
-    public void OnAttackAnimationHit()
+    public void OnAttackAnimationHit(List<EnemyHealthController> enemiesOnTarget)
     {
+        for (int i = enemiesOnTarget.Count - 1; i >= 0; i--)
+        {
+            var enemy = enemiesOnTarget[i];
 
+            if (currentCombo < 2)
+            {
+                enemy.TakeDamage(player.Sword.SwordPower);
+            }
+            else if(currentCombo >= 2)
+            {
+                enemy.TakeDamage(player.Sword.SwordPower * 2);
+            }
+
+            if (enemy.CurrentHealth <= 0)
+            {
+                enemiesOnTarget.RemoveAt(i);
+            }
+        }
     }
 }
 

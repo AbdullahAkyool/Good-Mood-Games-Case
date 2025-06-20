@@ -16,25 +16,28 @@ public class PlayerMoveState : IState
 
     public void StateUpdate()
     {
-        Vector2 input = player.GetInput();
+        Vector2 input = player.GetInputRaw();
 
-        if (input.sqrMagnitude <= 0.01f)
+        if (input.magnitude <= 0.1f)
         {
             player.stateMachine.ChangeState(new PlayerIdleState(player));
             return;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        if (isRunning)
         {
             player.stateMachine.ChangeState(new PlayerRunState(player));
             return;
         }
 
-        player.UpdateMovement(input, false);
         if (Input.GetMouseButtonDown(0))
         {
             player.stateMachine.ChangeState(new PlayerAttackState(player));
+            return;
         }
+
+        player.UpdateMovement(input, isRunning);
     }
 
     public void StateExit() { }

@@ -11,13 +11,17 @@ public class PlayerIdleState : IState
 
     public void StateEnter()
     {
+        player.Animator.ResetTrigger("Attack");
         player.Animator.CrossFade("Movement", 0.1f);
+
+        player.Animator.SetFloat("InputX", 0f);
+        player.Animator.SetFloat("InputY", 0f);
     }
 
     public void StateUpdate()
     {
-        Vector2 input = player.GetInput();
-        if (input.sqrMagnitude > 0.01f)
+        Vector2 input = player.GetInputRaw();
+        if (input.magnitude > 0.1f)
         {
             player.stateMachine.ChangeState(new PlayerMoveState(player));
         }

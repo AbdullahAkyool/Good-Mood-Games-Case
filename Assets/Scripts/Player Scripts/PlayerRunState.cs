@@ -16,9 +16,9 @@ public class PlayerRunState : IState
 
     public void StateUpdate()
     {
-        Vector2 input = player.GetInput();
+         Vector2 input = player.GetInputRaw();
 
-        if (input.sqrMagnitude <= 0.01f)
+        if (input.magnitude <= 0.1f)
         {
             player.stateMachine.ChangeState(new PlayerIdleState(player));
             return;
@@ -30,12 +30,13 @@ public class PlayerRunState : IState
             return;
         }
 
-        player.UpdateMovement(input, true);
-
         if (Input.GetMouseButtonDown(0))
         {
             player.stateMachine.ChangeState(new PlayerAttackState(player));
+            return;
         }
+        
+        player.UpdateMovement(input, isRunning: true);
     }
 
     public void StateExit() { }

@@ -105,6 +105,9 @@ public class PlayerController : MonoBehaviour
 
     public void AttackHit() // animation event
     {
-        Debug.Log("Attack hit");
+        if (stateMachine != null && stateMachine.CurrentState is PlayerAttackState playerAttackState)
+        {
+            Debug.Log("Attack hit");
+        }
     }
 }

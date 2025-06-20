@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAttackState : IState
 {
     private PlayerController player;
-    private int attackCount = 5;
+    private int attackAnimCount = 5;
 
     private int currentCombo = 0;
     private float necessaryInputTime = 0.7f;
@@ -59,22 +59,18 @@ public class PlayerAttackState : IState
 
     private void PlayAttackAnimation()
     {
-        int randomIndex = Random.Range(0, attackCount);
+        int randomIndex = Random.Range(0, attackAnimCount);
         player.Animator.SetInteger("AttackIndex", randomIndex);
         player.Animator.SetTrigger("Attack");
 
         // Combo UI
-        if (currentCombo == 0)
-        {
-            ActionManager.OnShowAttackMessage("CRITICAL HIT!");
-        }
-        else if (currentCombo == 1)
+        if (currentCombo == 1)
         {
             ActionManager.OnShowAttackMessage("x2 COMBO!");
         }
         else if (currentCombo == 2)
         {
-            ActionManager.OnShowAttackMessage("x3 COMBO!");
+            ActionManager.OnShowAttackMessage("x3 COMBO!\nCRITICAL HIT!");
         }
 
         progressBarController.ShowProgressBar(necessaryInputTime);
@@ -85,6 +81,11 @@ public class PlayerAttackState : IState
         animationFinished = true;
 
         progressBarController.HideProgressBar();
+    }
+
+    public void OnAttackAnimationHit()
+    {
+
     }
 }
 
